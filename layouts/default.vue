@@ -1,6 +1,6 @@
 <template>
 
-  <v-app >
+  <v-app  class="default">
     
   
 
@@ -8,7 +8,7 @@
     <v-app-bar
       color="teal"
       dark
-  
+
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -71,7 +71,7 @@
                 <v-spacer></v-spacer>
                 <v-progress-circular  indeterminate color="teal"  v-if="loading.login"></v-progress-circular>
                 <v-spacer></v-spacer>
-                <v-btn color="teal" class="whiteColor" @click="mylogin()">Login</v-btn>
+                <v-btn color="teal" class="whiteColor" @click="mylogin()" :loading="loading.login">Login</v-btn>
               </v-card-actions>
           <v-card-text type="info">
             dont have account? 
@@ -211,6 +211,7 @@ export default {
       localStorage.setItem('slugName', valueOfResponseData.data.slugName)
       localStorage.setItem('firstName', valueOfResponseData.data.firstName)
       localStorage.setItem('lastName', valueOfResponseData.data.lastName)
+      localStorage.setItem('id', valueOfResponseData.data._id)
     },
     noUser() {
       var token = localStorage.getItem('token')
