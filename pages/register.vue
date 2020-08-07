@@ -208,7 +208,8 @@ import axios from 'axios'
             email:'',
             password:'',
             slugName:'',
-            gender:''
+            gender:'',
+            lastSeen: new Date().getTime()
         },
       valid: true,
       name: '',

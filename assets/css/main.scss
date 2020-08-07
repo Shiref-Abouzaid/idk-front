@@ -1,0 +1,40 @@
+
+.whiteColor {
+    color: #FFF!important;
+}
+.padding-top-bottom-0 {
+    padding-top:0!important;
+    padding-bottom: 0!important;
+}
+.margin-side-5 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.no-shadow {
+    box-shadow: none!important;
+}
+.f0f0f0 {
+    background-color: #f0f0f0;
+}
+.default {
+    .v-list {
+        text-align: center;
+        button {
+            color: #FFF;
+        }
+    }
+    .v-item-group {
+        text-align: left;
+    }
+}
+
+
+//profile
+.profile {
+    .avatar-container {
+        text-align: center;
+    }
+    .mainLoading {
+        margin: auto;
+    }
+}

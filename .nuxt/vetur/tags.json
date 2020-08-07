@@ -1,0 +1,44 @@
+{
+  "Answers": {
+    "description": "Auto imported from components/Answers.vue"
+  },
+  "LazyAnswers": {
+    "description": "Auto imported from components/Answers.vue"
+  },
+  "Logo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "LazyLogo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "VuetifyLogo": {
+    "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "LazyVuetifyLogo": {
+    "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "AddQustion": {
+    "description": "Auto imported from components/addQustion.vue"
+  },
+  "LazyAddQustion": {
+    "description": "Auto imported from components/addQustion.vue"
+  },
+  "AnswersResault": {
+    "description": "Auto imported from components/answersResault.vue"
+  },
+  "LazyAnswersResault": {
+    "description": "Auto imported from components/answersResault.vue"
+  },
+  "MyQustions": {
+    "description": "Auto imported from components/myQustions.vue"
+  },
+  "LazyMyQustions": {
+    "description": "Auto imported from components/myQustions.vue"
+  },
+  "SuggestedQustion": {
+    "description": "Auto imported from components/suggestedQustion.vue"
+  },
+  "LazySuggestedQustion": {
+    "description": "Auto imported from components/suggestedQustion.vue"
+  }
+}

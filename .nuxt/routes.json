@@ -1,0 +1,37 @@
+[
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "/home/shiref/idk-front/pages/inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_0958038b"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/home/shiref/idk-front/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_cd5eda4c"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "/home/shiref/idk-front/pages/register.vue",
+    "chunkName": "pages/register",
+    "_name": "_25c25fc2"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/shiref/idk-front/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_60ae207a"
+  },
+  {
+    "name": "profile",
+    "path": "/:profile",
+    "component": "/home/shiref/idk-front/pages/_profile.vue",
+    "chunkName": "pages/_profile",
+    "_name": "_71102609"
+  }
+]
