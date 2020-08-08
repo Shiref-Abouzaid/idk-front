@@ -24,11 +24,11 @@
                         <v-btn color="teal" class="whiteColor" @click="startAnswersF()">Start</v-btn>
                     </div>
                 </v-card-text>
-                <v-card-text class="f0f0f0" align="center">
-                    <Facebook scale="3"/>
-                    <Twitter scale="3"/>
-                    <WhatsApp scale="3"/>
-                    <Telegram scale="3"/>
+                <v-card-text class="f0f0f0" align="center" v-if="myProfile">
+                    <Facebook scale="3" :url="currentUrl"/>
+                    <Twitter scale="3" :url="currentUrl"/>
+                    <WhatsApp scale="3" :url="currentUrl"/>
+                    <Telegram scale="3" :url="currentUrl"/>
                 </v-card-text>
             <v-col cols="12" v-if="startAnswers">
                 <v-stepper v-model="e1">
@@ -105,7 +105,7 @@
                         <v-tabs v-model="tab"  background-color="transparent" color="teal" grow >
                         <v-tab v-for="item in tabItems" :key="item" >
                             <p style="margin:0;padding:5px">{{ item }}</p>
-                            <template v-if="item == 'Answers'">
+                            <template v-if="item == 'Answers' && profileData.notifications > 0">
                                 <v-badge color="red" :content="profileData.notifications" > </v-badge>
                             </template>
                         </v-tab>
@@ -115,7 +115,7 @@
                         <v-tab-item >
                             <v-card color="basil" flat >
                             <v-card-text>
-                                <Answers :theCameAnswers="profileData.answers"/>
+                                <Answers :theCameAnswers="profileData.answers" :notifications="profileData.notifications"/>
                             </v-card-text>
                             </v-card>
                         </v-tab-item>
@@ -137,6 +137,7 @@
                                             <v-card
                                                 style="margin:10px 0"
                                                 v-show="showAddQustion"
+                                                @hideQustion="hideQ"
                                                 class="mx-auto">
                                                 <addQustion />
                                             </v-card>
@@ -199,6 +200,7 @@ import Vue from 'vue'
         data () {
             return {
                 startAnswers: false,
+                currentUrl:window.location.href,
                 friendAnswer:{
                     answers:'',
                     name:'',
@@ -220,6 +222,9 @@ import Vue from 'vue'
             }
         },
         methods: {
+            hideQ() {
+                this.showAddQustion = false
+            },
             getGender() {
                 if(this.profileData.gender !== 'Male' && this.profileData.gender !== 'Female') {
                     return ''
@@ -327,7 +332,19 @@ import Vue from 'vue'
                     console.log(err.response)
                 })
             },
-
+            resetNofitifcation() {
+                axios.put('http://localhost:3000/api/resetNotifications/' + this.myId, '',{
+                    headers:{
+                        'authorization': this.token
+                    }
+                })
+                .then(res=>{
+                    console.log('notification reset')
+                })
+                .catch(err=>{
+                    console.log(err.response)
+                })
+            },
             getPriviteProfile() {
                 axios.get('http://localhost:3000/api/getFullProfile/' + this.profileSlugName, {
                     headers: {
@@ -338,7 +355,9 @@ import Vue from 'vue'
                     console.log(res)
                     this.profileData = res.data.data
                     this.loading.main = false;
-                    this.myProfile = true
+                    this.myProfile = true;
+                    this.resetNofitifcation();
+
                 })
                 .catch(err=>{
                     console.log(err.response)
@@ -366,7 +385,7 @@ import Vue from 'vue'
             }
         },
         mounted() {
-          console.log(this.profileSlugName)
+
             var privateProfile = localStorage.getItem('slugName')
             if(privateProfile != this.profileSlugName) {
                 this.getPublicProfile()

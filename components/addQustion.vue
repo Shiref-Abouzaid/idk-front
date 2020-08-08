@@ -55,7 +55,7 @@
                             {{message.addQustion}}
                         </v-alert>
                          <v-card-actions class="float-right">
-                              <v-btn color="warning" class="whiteColor " >Cancel</v-btn>
+                              <v-btn color="warning" class="whiteColor " @click="cancel()" >Cancel</v-btn>
                              <v-btn color="teal" class="whiteColor " type="submit">Send</v-btn>
                          </v-card-actions>
                         
@@ -104,6 +104,9 @@ export default {
     },
     
     methods: {
+        cancel() {
+            this.$emit('hideQustion')
+        },
         addChoice() {
             this.qustionData.answers.push('')
         },

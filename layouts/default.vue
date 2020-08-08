@@ -18,10 +18,12 @@
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
+
       </v-btn>
 
       <v-btn icon>
         <v-icon>mdi-filter</v-icon>
+
       </v-btn>
 
       <v-btn icon>
@@ -41,48 +43,17 @@
         dense
        
       >
-        <v-avatar color="teal" size="80" align="center">
+        <v-avatar color="teal" size="80" align="center" v-if="!noUser()">
           <span class="white--text headline">
-            <span v-if="noUser()">IDK</span>
-            <span v-if="!noUser()">{{firstLetters()}}</span>
+            <span >{{firstLetters()}}</span>
           </span>
         </v-avatar>
-        <v-card-text v-if="noUser()">
-          <v-form>
-            <v-text-field
-              color="teal"
-              label="Login"
-              name="login"
-              v-model="login.email"
-              prepend-icon="mdi-account"
-              type="text"
-            ></v-text-field>
-
-            <v-text-field
-              color="teal"
-              v-model="login.password"
-              label="Password"
-              name="password"
-              prepend-icon="mdi-lock"
-              type="password"
-            ></v-text-field>
-          </v-form>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-progress-circular  indeterminate color="teal"  v-if="loading.login"></v-progress-circular>
-                <v-spacer></v-spacer>
-                <v-btn color="teal" class="whiteColor" @click="mylogin()" :loading="loading.login">Login</v-btn>
-              </v-card-actions>
-          <v-card-text type="info">
-            dont have account? 
-                    <v-list-item  to="/register">
-                      <v-list-item-title>Regist Now</v-list-item-title>
-                    </v-list-item>
-          </v-card-text>
-        </v-card-text>
         <v-card-text v-if="!noUser()">
-          {{firstName}}
+          <v-list-item  :to="'/' + slugName">
+            {{firstName}}
+          </v-list-item>
         </v-card-text>
+        
         <v-list-item-group
           active-class="teal--text text--accent-4"
         >
@@ -94,14 +65,49 @@
           </v-list-item>
 
 
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
+          <v-list-item @click="logOut()">
+            <v-list-item-title >Logout</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
         </v-list-item-group>
+<v-card-text v-if="noUser()">
+          <v-form>
+            <v-text-field
+              color="teal"
+              label="Login"
+              name="login"
+              v-model="login.email"
+              prepend-icon="mdi-account"
+              reqired
+              type="email"
+            ></v-text-field>
+
+            <v-text-field
+              color="teal"
+              v-model="login.password"
+              label="Password"
+              name="password"
+              prepend-icon="mdi-lock"
+              type="password"
+              @keypress.enter="mylogin()"
+            ></v-text-field>
+          </v-form>
+              <v-card-actions>
+     
+
+                <v-spacer></v-spacer>
+                <v-btn color="teal" class="whiteColor" @click="mylogin()" :loading="loading.login">Login</v-btn>
+              </v-card-actions>
+          <v-alert type="error"  v-if="error.responseError">{{error.responseError}}</v-alert>
+
+          <v-card-text type="info">
+            dont have account? 
+                    <v-list-item  to="/register">
+                      <v-list-item-title>Regist Now</v-list-item-title>
+                    </v-list-item>
+          </v-card-text>
+        </v-card-text>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -156,6 +162,9 @@ export default {
         responseError:'',
         success:''
       },
+      message:{
+        message:''
+      },
       login:{
         email:'',
         password:'',
@@ -180,10 +189,18 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js',
       firstName: localStorage.getItem('firstName'),
-      lastName: localStorage.getItem('lastName')
+      lastName: localStorage.getItem('lastName'),
+      slugName:localStorage.getItem('slugName')
     }
   },
   methods: {
+    logOut() {
+      localStorage.removeItem('token')
+      localStorage.removeItem('firstName')
+      localStorage.removeItem('lastName')
+      localStorage.removeItem('id')
+      localStorage.removeItem('slugName')
+    },
     firstLetters() {
       var fn = localStorage.getItem('firstName')
       var ln = localStorage.getItem('lastName')
@@ -212,6 +229,8 @@ export default {
       localStorage.setItem('firstName', valueOfResponseData.data.firstName)
       localStorage.setItem('lastName', valueOfResponseData.data.lastName)
       localStorage.setItem('id', valueOfResponseData.data._id)
+
+      this.$router.push({ path: valueOfResponseData.data.slugName })
     },
     noUser() {
       var token = localStorage.getItem('token')
@@ -221,6 +240,7 @@ export default {
         return true 
       }
     }
-  }
+  },
+
 }
 </script>
