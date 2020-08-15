@@ -55,7 +55,7 @@
           <v-col cols="12" sm="6" >
               <v-text-field
               style="padding:20px"
-                  :value="'idk.com/' + userRegist.slugName"
+                  :value="currentUrl.replace('register', '') + userRegist.slugName"
                   label="Slug Name"
                   :disabled="true"
                   :class="{'warning': !userAvailable }" 
@@ -190,6 +190,7 @@ import axios from 'axios'
 
   export default {
     data: () => ({
+      currentUrl:window.location.href,
       confirmPassword:{
         error:false,
         value:''

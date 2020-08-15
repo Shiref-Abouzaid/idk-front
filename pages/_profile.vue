@@ -18,6 +18,13 @@
                     <p class="font-weight-light" v-if="!myProfile">
                         {{'last seen ' + dateFormate()}}
                     </p>
+                    <p style="margin:5px 0;font-size:16px;color:#333">
+                        {{profileData.bio}}
+                    </p>
+                    <p class="font-weight-light" v-if="myProfile">
+                        <v-btn class="whiteColor" color="teal" x-small @click="showBioEditBio = true" v-if="!showBioEditBio">Edit Bio</v-btn>
+                        <Bio v-if="showBioEditBio" :bio="profileData.bio" @hidebio="showBioEditBio = false" @backbio="updatelocalbio"/>
+                    </p>
                     </v-flex>
                     <div align="center" v-if="!myProfile">
                         <p class="font-weight-bold">Do You Know {{profileData.firstName + ' ' + profileData.lastName + ' ?'}}</p>
@@ -173,7 +180,7 @@ import myQustions from '../components/myQustions'
 import suggestedQustion from '../components/suggestedQustion'
 import answersResault from '../components/answersResault'
 import Answers from '../components/Answers'
-
+import Bio from '../components/Bio'
 import { mapMutations } from 'vuex'
 import { Facebook } from 'vue-socialmedia-share';
 import { Twitter } from 'vue-socialmedia-share';
@@ -195,10 +202,12 @@ import Vue from 'vue'
             Twitter,
             Linkedin,
             Telegram,
-            WhatsApp
+            WhatsApp,
+            Bio
         },
         data () {
             return {
+                showBioEditBio:false,
                 startAnswers: false,
                 currentUrl:window.location.href,
                 friendAnswer:{
@@ -222,6 +231,9 @@ import Vue from 'vue'
             }
         },
         methods: {
+            updatelocalbio(event) {
+                this.profileData.bio = event
+            },
             hideQ() {
                 this.showAddQustion = false
             },

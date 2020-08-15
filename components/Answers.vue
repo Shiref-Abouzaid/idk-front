@@ -1,64 +1,65 @@
 <template>
     <div class="answers">
-        <!-- <v-card v-for="(single, index) in theCameAnswers" :key="'came' + index">
-            <v-card-title>
-                {{single.name}} 
-            </v-card-title>
-        </v-card> -->
-        <v-expansion-panels :popout="true" :focusable="true">
 
-            <v-expansion-panel
-            v-for="(item,index) in theCameAnswers"
-            :key="index + 'name'">
-                <div>
-                    <v-btn  color="error"  small @click.stop="dialog = true; indexToDelete = index">delete</v-btn>
-                </div>
-                <v-expansion-panel-header>
-                    <p>
-                        {{item.name}}
+        <div v-if="theCameAnswers.length < 1">
+            
+        </div>
+<v-card class="mx-auto" v-for="(item,index) in theCameAnswers" :key="index + 'name'" outlined align="center" >
+    <v-list-item three-line>
+        <v-list-item-content>
+             <v-list-item-title class="headline mb-2">
+                <span class="name">{{item.name}}</span>
+ 
 
-                        <template v-if="item.persent >= 50">
-                            <v-btn text color="success" class="float-right present">{{item.persent}}%</v-btn>
-                            <v-icon color="success" v-if="item.persent == 100"  class="float-right present">mdi-check</v-icon>
-                        </template>
-                        <template v-if="item.persent < 50">
-                            <v-btn text color="error" class="float-right present">{{item.persent}}%</v-btn>
-                        </template>
-                        <template v-if="(index+1) <= notifications">
-                            <v-btn text color="success" class="float-right">New</v-btn>
-                        </template>
-                         
-                    </p>
-                </v-expansion-panel-header>
-            <v-expansion-panel-content>
-                <v-simple-table>
-                    <template v-slot:default>
-   
-                    <tbody>
-                        <tr v-for="(an, index2) in item.answers" :key="index2 + 'persone'">
-                            <td align="center" class="single-answer-of" colspan="2">
-                               <p>{{ an.qustion }}</p>
-                                <template v-if="an.correctAnswer !== an.friendChoose">
-                                    <v-btn text color="success">{{an.correctAnswer}}</v-btn>
-                                    <v-btn text color="error" >{{an.friendChoose}}</v-btn>
-                                </template>
-                                <template v-else>
-                                    <v-btn text color="success">{{an.correctAnswer}}</v-btn>
-                                </template>
+                <v-menu offset-y class="float-right">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn icon class="float-right"  v-bind="attrs"  v-on="on">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                    </v-btn>
+                </template>
+                <v-list>
+                    <v-list-item>
+                    <v-list-item-title>
+                        <v-btn  text large color="error" @click.stop="dialog = true; indexToDelete = index">delete</v-btn>
+                    </v-list-item-title>
+                    </v-list-item>
+                </v-list>
+                </v-menu>
+ 
+                <template v-if="(index+1) <= notifications">
+                    <v-btn text color="success" class="float-right">New</v-btn>
+                </template>
 
-                            </td>
-                            <!-- <td v-for="(chose, index3) in an.answers" :key="index3+chose"> {{chose}}</td> -->
-                        </tr>
-                        <tr>
-                            <td align="center" style="padding:5px"> <v-btn  color="error"  large @click.stop="dialog = true; indexToDelete = index">delete</v-btn></td>
-                        </tr>
-                    </tbody>
+
+                
+             </v-list-item-title>
+            <v-card-actions >
+                <template v-if="item.persent >= 50">
+                    <v-btn text color="success" class="float-right present" x-large>{{item.persent}}%</v-btn>
+                    <v-icon color="success" v-if="item.persent == 100"  class="float-right present" >mdi-check</v-icon>
+                </template>
+                <template v-if="item.persent < 50">
+                    <v-btn text color="error" class="float-right present" x-large>{{item.persent}}%</v-btn>
+                </template>
+            </v-card-actions>
+            <v-list-item-subtitle v-for="(an, index2) in item.answers" :key="index2 + 'persone'">
+                <div  class="single-answer-of" colspan="2">
+                    <p>{{ an.qustion }}</p>
+                    <template v-if="an.correctAnswer !== an.friendChoose">
+                        <v-btn text color="success">{{an.correctAnswer}}</v-btn>
+                        <v-btn text color="error" >{{an.friendChoose}}</v-btn>
                     </template>
-                </v-simple-table>
-            </v-expansion-panel-content>
+                    <template v-else>
+                        <v-btn text color="success">{{an.correctAnswer}}</v-btn>
+                    </template>
+                </div>
+            </v-list-item-subtitle>
+            
+         </v-list-item-content>
 
-            </v-expansion-panel>
-        </v-expansion-panels>
+    </v-list-item>
+
+  </v-card>
  <v-dialog v-model="dialog"  max-width="290" >
       <v-card>
         <v-card-title class="headline">Are You sure You want to delete this Answer?</v-card-title>
