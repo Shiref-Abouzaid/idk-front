@@ -72,6 +72,7 @@ export default {
                 this.qustions.splice(value, 1)
             })
             .catch(err=>{
+                
                 console.log(err.response)
             })
         },

@@ -64,11 +64,80 @@ header {
 }
 .answers .single-answer-of p {
   padding-top: 5px;
-  font-size: 22px;
+  font-size: 16px;
   margin-bottom: 0;
 }
 .answers .cancel .v-application--is-ltr .v-expansion-panel-header {
   display: none;
+}
+.answers .v-list-item__subtitle {
+  border-bottom: 1px solid #f0f0f0;
+}
+.answers .v-list-item__subtitle:last-child {
+  border: none;
+}
+.answers .v-card__actions .present {
+  margin: auto;
+  font-size: 28px;
+}
+.answers .headline .name {
+  margin-left: 36px;
+}
+
+.theme--light.v-card > .v-card__text, .theme--light.v-card .v-card__subtitle {
+  padding-top: 0;
+}
+
+.bio .emoji-pi.containercker-container {
+  margin: 10px auto;
+}
+.bio .emoji-picker-container {
+  margin: 10px auto;
+}
+.bio .emoji-wysiwyg-editor {
+  width: 250px !important;
+}
+.bio i.emoji-picker-icon.emoji-picker {
+  left: 10px;
+}
+
+.height100 {
+  height: 100% !important;
+}
+
+.home-btn-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.home-btn-container h1 {
+  color: #666 !important;
+  margin-bottom: 20px;
+}
+.home-btn-container a {
+  min-width: 200px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 0;
+  }
+
+  .container {
+    padding: 0 !important;
+  }
+
+  .v-application .mb-4 {
+    padding-top: 20px;
+  }
+
+  .col-12 {
+    padding: 0 !important;
+  }
+
+  .v-card > :last-child:not(.v-btn):not(.v-chip) {
+    padding: 0;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

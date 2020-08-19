@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+
     <v-main>
       <v-container
         class="fill-height"
@@ -42,6 +42,7 @@
                     label="Password"
                     prepend-icon="mdi-lock"
                     type="password"
+                    @keypress.enter="mylogin()"
                   ></v-text-field>
                 </v-form>
                 <v-alert type="error" v-if="error.responseError">
@@ -61,7 +62,7 @@
       </v-container>
       
     </v-main>
-  </v-app>
+
 </template>
 
 <script>
@@ -104,6 +105,8 @@ import axios from "axios"
           localStorage.setItem('token', valueOfResponseData.token)
           localStorage.setItem('slugName', valueOfResponseData.data.slugName)
           localStorage.setItem('firstName', valueOfResponseData.data.firstName)
+          
+          this.$router.push({ path: valueOfResponseData.data.slugName })
         }
       }
   }

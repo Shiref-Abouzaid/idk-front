@@ -54,8 +54,31 @@ export default {
   /*
   ** Nuxt.js modules
   */
+ 
   modules: [
+    ['nuxt-i18n', {
+      lazy:true,
+    
+      locales:[
+        {
+          name: "ar",
+          code:"ar",
+          iso:"ar-AR",
+          file:"ar-Ar.js"
+        },
+        {
+          name: "English",
+          code:"en",
+          iso:"en-EN",
+          file:"en-EN.js"
+        },
+      ],
+      langDir: 'lang/',
+      defaultLocale: 'en',
+
+    }]
   ],
+
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

@@ -13,22 +13,43 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
  
-      <v-toolbar-title>IDK</v-toolbar-title>
+      <v-toolbar-title>
+        <v-btn  to="/" text large class="logo">
+
+               <img src="~/assets/logo-white.png" />
+        </v-btn>
+      </v-toolbar-title>
+
+      <v-btn text  to="/">
+        home
+      </v-btn>
+      <v-btn text to="/login">
+        login
+      </v-btn>
+      <v-btn text to="/register">
+        regist
+      </v-btn>
+
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+  
+
+      <v-btn text :to="'/' + slugName" v-if="slugName">
+        {{`${firstName}`}}
+      </v-btn>
+     <v-btn text x-small @click="logOut()" v-if="!noUser()">
+        LogOut
+      </v-btn>
+
+   
+
+   
+    <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
 
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-filter</v-icon>
 
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -65,7 +86,7 @@
           </v-list-item>
 
 
-          <v-list-item @click="logOut()">
+          <v-list-item @click="logOut()" v-if="!noUser()">
             <v-list-item-title >Logout</v-list-item-title>
           </v-list-item>
 
@@ -118,9 +139,35 @@
     <v-content>
       <v-container>
         <nuxt />
+        
       </v-container>
     </v-content>
+<v-footer
+    color="teal "
+    padless
+  >
+    <v-row  justify="center" no-gutters >
+ 
+      <v-btn text  x-small class="my-2 white--text">
+        &copy; {{ new Date().getFullYear() }} — <strong>IDK</strong>
+      </v-btn>
+     <v-btn text  x-small class="my-2  white--text" target="_blank" href="https://www.linkedin.com/in/shiref-abouzaid/">
+        Designed and developed by Shiref AbouZaid
+      </v-btn>
+      <v-btn text  x-small class="my-2 white--text">
+        Terms
+      </v-btn>
+      <v-btn text  x-small class="my-2 white--text">
+        Privacy
+      </v-btn>
 
+      <v-btn class=" white--text" icon target="_blank" href="https://www.facebook.com/repolab.official">
+          <v-icon size="24px">mdi-facebook</v-icon>
+      </v-btn>
+ 
+    </v-row>
+
+  </v-footer>
   <!--bottom nav-->
    <!-- <v-bottom-navigation
       scroll-target="#scroll-area-2"
@@ -149,12 +196,14 @@
   </v-app>
 </template>
 
+
 <script>
   import axios from 'axios'
 export default {
 
   data () {
     return {
+
       loading:{
         login:false,
       },
@@ -193,6 +242,7 @@ export default {
       slugName:localStorage.getItem('slugName')
     }
   },
+ 
   methods: {
     logOut() {
       localStorage.removeItem('token')
@@ -200,11 +250,16 @@ export default {
       localStorage.removeItem('lastName')
       localStorage.removeItem('id')
       localStorage.removeItem('slugName')
+
+      this.$router.go()
     },
     firstLetters() {
+      if (localStorage.getItem('lastName')){
       var fn = localStorage.getItem('firstName')
       var ln = localStorage.getItem('lastName')
       return fn[0].toUpperCase() + ln[0].toUpperCase()
+      }
+
     },
       mylogin() {
       this.loading.login = true

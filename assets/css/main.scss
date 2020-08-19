@@ -20,6 +20,17 @@ $mainColor: #009688;
     background-color: #f0f0f0;
 }
 .default {
+    .logo {
+        img {
+            width:80px;
+            padding-bottom: 10px;
+        }
+
+    }
+    .logo::before {
+        background-color:transparent;
+
+    }
     .v-list {
         text-align: center;
         button {
@@ -65,7 +76,7 @@ header {
         
        p {
         padding-top: 5px;
-           font-size: 22px;
+           font-size: 16px;
             margin-bottom: 0;
         }
     }
@@ -73,5 +84,73 @@ header {
         .v-application--is-ltr .v-expansion-panel-header {
             display: none;
         }
+    }
+    .v-list-item__subtitle {
+        border-bottom: 1px solid #f0f0f0;
+       
+        &:last-child {
+            border:none
+        }
+    }
+    .v-card__actions {
+        .present {
+            margin:auto;
+            font-size: 28px;
+        }
+    }
+    .headline {
+        .name {
+            margin-left: 36px;
+        }
+    }
+}
+.theme--light.v-card > .v-card__text, .theme--light.v-card .v-card__subtitle {
+    padding-top: 0;
+}
+.bio {
+    .emoji-pi.containercker-container {
+        margin: 10px auto;
+    }
+    .emoji-picker-container {
+        margin: 10px auto;
+    }
+    .emoji-wysiwyg-editor {
+        width:250px!important;
+    }
+    i.emoji-picker-icon.emoji-picker {
+        left:10px
+    }
+}
+.height100 {
+    height: 100% !important;
+}
+.home-btn-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    h1 {
+        color: #666!important;
+        margin-bottom: 20px;
+    }
+    a {
+        min-width: 200px!important;
+   
+    }
+}
+@media only screen and (max-width: 600px) {
+    .container {
+        padding:0;
+    }
+    .container {
+        padding:0!important
+    }
+    .v-application .mb-4 {
+        padding-top: 20px;
+    }
+    .col-12 {
+        padding:0!important;
+    }
+    .v-card > :last-child:not(.v-btn):not(.v-chip) {
+        padding:0
     }
 }
